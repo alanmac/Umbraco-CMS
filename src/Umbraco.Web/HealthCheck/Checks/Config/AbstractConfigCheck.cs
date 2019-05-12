@@ -65,6 +65,15 @@ namespace Umbraco.Web.HealthCheck.Checks.Config
             get { return string.Empty; }
         }
 
+        /// <summary>
+        /// If a value is required, what property type to render is provided here
+        /// </summary>
+        public virtual ProvidedValuePropertyType ProvidedValuePropertyType
+        {
+            get { return ProvidedValuePropertyType.TextInput; }
+        }
+
+
         protected AbstractConfigCheck(HealthCheckContext healthCheckContext) : base(healthCheckContext)
         {
             _textService = healthCheckContext.ApplicationContext.Services.TextService;
@@ -190,6 +199,7 @@ namespace Umbraco.Web.HealthCheck.Checks.Config
             {
                 rectifyAction.ProvidedValueValidation = ProvidedValueValidation.ToString().ToLower();
                 rectifyAction.ProvidedValueValidationRegex = ProvidedValueValidationRegex;
+                rectifyAction.ProvidedValuePropertyType = ProvidedValuePropertyType.ToString().ToLower();
             }
 
             var resultMessage = string.Format(CheckErrorMessage, FileName, XPath, Values, CurrentValue);
